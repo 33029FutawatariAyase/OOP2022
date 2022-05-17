@@ -4,20 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Section01 {
+namespace Section04 {
     class Program {
-
         static void Main(string[] args) {
-            var list = new List<string> {
+            var names = new List<string> {
                "Tokyo", "New Delhi", "Bangkok", "London", "Paris", "Berlin", "Canberra", "Hong Kong",
             };
 
-            
+            var query = names.Select(s => s.Length);
+            foreach (var s in query) {
+                Console.WriteLine(s);
 
-            var LowerList = list.ConvertAll(s => s.ToLower());
-            LowerList.ForEach(s => Console.WriteLine(s));
-                
+            }
+
         }
-            
     }
 }
