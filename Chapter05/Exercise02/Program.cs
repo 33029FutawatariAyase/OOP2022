@@ -9,9 +9,14 @@ namespace Exercise02 {
         static void Main(string[] args) {
 
             Console.WriteLine("文字列を入力");
-            var inputstring1 = Console.ReadLine();
+            var line = Console.ReadLine();
 
-            
+            int num;
+            if (int.TryParse(line, out num)) {
+                Console.WriteLine("{0:#,#}", num);
+            }else {
+                Console.WriteLine("数値文字列ではありません");
+            }    
         }
     }
 }
