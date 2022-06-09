@@ -10,22 +10,16 @@ using System.Windows.Forms;
 
 namespace Sample0607 {
     public partial class Form1 : Form {
+
+        Random rnd = new Random();
+
         public Form1() {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e) {
-            
-            
-            if(int.Parse(nudNum2.Text) != 0) {
-                nudAns.Value = nudNum1.Value / nudNum2.Value;
-                nudMod.Value = nudNum1.Value % nudNum2.Value;
-            }
-            else {
-                MessageBox.Show("計算できない","エラー", 
-                    MessageBoxButtons.OK,MessageBoxIcon.Error);
-            }
-            
+        private void btRandom_Click(object sender, EventArgs e) {
+
+            Number.Value = rnd.Next(minValue:(int)minNum.Value,maxValue:(int)maxNum.Value +1);
         }
     }
 }
