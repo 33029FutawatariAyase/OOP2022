@@ -43,6 +43,8 @@ namespace AddressBook {
             this.btPictureOpen = new System.Windows.Forms.Button();
             this.btPictureClear = new System.Windows.Forms.Button();
             this.ofdFileOpenDialog = new System.Windows.Forms.OpenFileDialog();
+            this.btUpdate = new System.Windows.Forms.Button();
+            this.btDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersons)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPicture)).BeginInit();
             this.SuspendLayout();
@@ -99,12 +101,17 @@ namespace AddressBook {
             // 
             // dgvPersons
             // 
+            this.dgvPersons.AllowUserToAddRows = false;
             this.dgvPersons.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPersons.Location = new System.Drawing.Point(12, 288);
+            this.dgvPersons.MultiSelect = false;
             this.dgvPersons.Name = "dgvPersons";
+            this.dgvPersons.ReadOnly = true;
             this.dgvPersons.RowTemplate.Height = 21;
+            this.dgvPersons.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPersons.Size = new System.Drawing.Size(776, 150);
             this.dgvPersons.TabIndex = 1;
+            this.dgvPersons.Click += new System.EventHandler(this.dgvPersons_Click);
             // 
             // tbName
             // 
@@ -182,9 +189,9 @@ namespace AddressBook {
             // btAddPerson
             // 
             this.btAddPerson.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btAddPerson.Location = new System.Drawing.Point(652, 240);
+            this.btAddPerson.Location = new System.Drawing.Point(576, 233);
             this.btAddPerson.Name = "btAddPerson";
-            this.btAddPerson.Size = new System.Drawing.Size(104, 34);
+            this.btAddPerson.Size = new System.Drawing.Size(66, 41);
             this.btAddPerson.TabIndex = 4;
             this.btAddPerson.Text = "追加";
             this.btAddPerson.UseVisualStyleBackColor = true;
@@ -192,6 +199,7 @@ namespace AddressBook {
             // 
             // pbPicture
             // 
+            this.pbPicture.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.pbPicture.Location = new System.Drawing.Point(633, 42);
             this.pbPicture.Name = "pbPicture";
             this.pbPicture.Size = new System.Drawing.Size(91, 120);
@@ -222,6 +230,28 @@ namespace AddressBook {
             // 
             this.ofdFileOpenDialog.FileName = "openFileDialog1";
             // 
+            // btUpdate
+            // 
+            this.btUpdate.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btUpdate.Location = new System.Drawing.Point(650, 233);
+            this.btUpdate.Name = "btUpdate";
+            this.btUpdate.Size = new System.Drawing.Size(66, 41);
+            this.btUpdate.TabIndex = 4;
+            this.btUpdate.Text = "更新";
+            this.btUpdate.UseVisualStyleBackColor = true;
+            this.btUpdate.Click += new System.EventHandler(this.btUpdate_Click);
+            // 
+            // btDelete
+            // 
+            this.btDelete.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btDelete.Location = new System.Drawing.Point(722, 233);
+            this.btDelete.Name = "btDelete";
+            this.btDelete.Size = new System.Drawing.Size(66, 41);
+            this.btDelete.TabIndex = 4;
+            this.btDelete.Text = "削除";
+            this.btDelete.UseVisualStyleBackColor = true;
+            this.btDelete.Click += new System.EventHandler(this.btDelete_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -230,6 +260,8 @@ namespace AddressBook {
             this.Controls.Add(this.btPictureClear);
             this.Controls.Add(this.btPictureOpen);
             this.Controls.Add(this.pbPicture);
+            this.Controls.Add(this.btDelete);
+            this.Controls.Add(this.btUpdate);
             this.Controls.Add(this.btAddPerson);
             this.Controls.Add(this.cbWork);
             this.Controls.Add(this.cbOther);
@@ -275,6 +307,8 @@ namespace AddressBook {
         private System.Windows.Forms.Button btPictureOpen;
         private System.Windows.Forms.Button btPictureClear;
         private System.Windows.Forms.OpenFileDialog ofdFileOpenDialog;
+        private System.Windows.Forms.Button btUpdate;
+        private System.Windows.Forms.Button btDelete;
     }
 }
 
