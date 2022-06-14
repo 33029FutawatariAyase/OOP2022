@@ -19,17 +19,22 @@ namespace AddressBook {
         }
 
         private void btAddPerson_Click(object sender, EventArgs e) {
-            Person newPerson = new Person {
-                Name = tbName.Text,
-                MailAddress = tbMailAddress.Text,
-                Address = tbAddress.Text,
-                Company = tbCompany.Text,
-                Picture = pbPicture.Image,
-                listGroup = GetCheckBoxGroup(),
-            };
-           
-            listPerson.Add(newPerson);
+            if(tbName == null) {
+                MessageBox.Show("名前が入力されていません","エラー",MessageBoxButtons.OK,MessageBoxIcon.Hand);
+            }
+            else {
+                Person newPerson = new Person {
 
+                    Name = tbName.Text,
+                    MailAddress = tbMailAddress.Text,
+                    Address = tbAddress.Text,
+                    Company = tbCompany.Text,
+                    Picture = pbPicture.Image,
+                    listGroup = GetCheckBoxGroup(),
+                };
+                listPerson.Add(newPerson);
+                
+            }                       
         }
 
         //チェックボックスにセットされている値をリストとして取り出す
@@ -116,6 +121,15 @@ namespace AddressBook {
         //削除ボタンが押された時の処理
         private void btDelete_Click(object sender, EventArgs e) {
             listPerson.RemoveAt(dgvPersons.CurrentRow.Index);
+            if(listPerson.Count() == 0) {
+                btDelete.Enabled = false;
+                btUpdate.Enabled = false;
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e) {
+            btDelete.Enabled = false;//削除ボタンをマスク
+            btUpdate.Enabled = false;//更新ボタンをマスク
 
         }
     }
