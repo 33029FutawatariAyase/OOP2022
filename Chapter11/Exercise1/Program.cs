@@ -18,7 +18,11 @@ namespace Exercise1 {
             Console.WriteLine();
 
             var newfile = "sports.xml";
-            Exercise1_4(file, newfile);
+            //Exercise1_4(file, newfile);
+
+            //確認用
+            var text = File.ReadAllText(newfile);
+            Console.WriteLine(text);
         }
 
         private static void Exercise1_1(string file) {
@@ -38,23 +42,36 @@ namespace Exercise1 {
             var xdoc = XDocument.Load("sample.xml");
             var ballsports = xdoc.Root.Elements()               
                 .Select(x => new {
-                    Name = (string)x.Element("name").Attribute("kanji"),
-                    Year = (int)x.Element("firstplayed"),
+                    Name = x.Element("name").Attribute("kanji").Value,
+                    Firstplayed = x.Element("firstplayed").Value,
 
                 })
-                .OrderBy(x => ("firstplayed"));
+                .OrderBy(x => int.Parse(x.Firstplayed));
             foreach (var ballsport in ballsports) {
-                Console.WriteLine("{0} ({1})", ballsport.Name, ballsport.Year);
+                Console.WriteLine("{0} ({1})", ballsport.Name, ballsport.Firstplayed);
             }
         }
 
         private static void Exercise1_3(string file) {
             var xdoc = XDocument.Load("sample.xml");
-            
+            var ballsport = xdoc.Root.Elements()
+                .Select(x => new {
+                    Name = x.Element("name").Value,
+                    Teammembers = x.Element("teammembers").Value,
+
+                }).OrderByDescending(x => int.Parse(x.Teammembers)).First();           
+                Console.WriteLine("{0} {1}", ballsport.Name, ballsport.Teammembers);
         }
 
         private static void Exercise1_4(string file, string newfile) {
-            
+
+            var xdoc = XDocument.Load(file);
+            var element = new XElement("ballsport",
+                             new XElement("name", "サッカー", new XAttribute("kanji", "蹴球")),
+                             new XElement("teammembers", "11"),
+                             new XElement("firstplayed", "1863"));
+            xdoc.Root.Add(element);
+            xdoc.Save("sports.xml");
         }
     }
 }
