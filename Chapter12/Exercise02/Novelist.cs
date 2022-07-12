@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
 [XmlRoot("novelist")]
+[DataContract]
 public class Novelist {
     [XmlElement(ElementName = "name")]
     [DataMember(Name = "name")]
