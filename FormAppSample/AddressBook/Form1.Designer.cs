@@ -279,6 +279,9 @@ namespace AddressBook {
             this.btSave.UseVisualStyleBackColor = true;
             this.btSave.Click += new System.EventHandler(this.btSave_Click);
             // 
+            // sfdSaveDialog
+            // 
+            // 
             // label6
             // 
             this.label6.AutoSize = true;

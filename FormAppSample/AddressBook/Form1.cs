@@ -223,6 +223,6 @@ namespace AddressBook {
                 }
             }
             EnabledCheck(); //マスク処理呼び出し
-        }       
+        }
     }
 }
