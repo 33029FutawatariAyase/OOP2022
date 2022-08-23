@@ -9,6 +9,6 @@ namespace CarReportSystem {
     //設定情報
     [Serializable]
     public class Settings {
-        public String MainFormColor { get; set; }
+        public int MainFormColor { get; set; }
     }
 }

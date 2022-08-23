@@ -152,14 +152,14 @@ namespace CarReportSystem {
         private void 設定ToolStripMenuItem_Click(object sender, EventArgs e) {
             if (cdColorSelect.ShowDialog() == DialogResult.OK) {
                 BackColor = cdColorSelect.Color;
-                settings.MainFormColor = "dddddd";//cdColorSelect.Color;
+                settings.MainFormColor = cdColorSelect.Color.ToArgb();
             }
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
             
             //設定ファイルをシリアル化(P305)
-            using(var writer = XmlWriter.Create("settings.Xml")) {
+            using(var writer = XmlWriter.Create("settings.xml")) {
                 var serializer = new XmlSerializer(settings.GetType());
                 serializer.Serialize(writer, settings);
             }
@@ -170,7 +170,8 @@ namespace CarReportSystem {
             using(var reader = XmlReader.Create("settings.xml")) {
                 var serializer = new XmlSerializer(typeof(Settings));
                 settings = serializer.Deserialize(reader) as Settings;
-                Console.WriteLine(settings);
+                BackColor = Color.FromArgb(settings.MainFormColor);//ARGB形式からColorオブジェクトへ変換
+                //Console.WriteLine(settings);
             }
 
             EnabledCheck(); //マスク処理呼び出し
