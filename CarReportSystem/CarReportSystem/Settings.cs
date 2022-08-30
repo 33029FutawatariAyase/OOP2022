@@ -6,9 +6,21 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CarReportSystem {
+ 
     //設定情報
-    [Serializable]
+    
     public class Settings {
+        private static Settings settings;
+
+        private Settings() {}
+
+        public static Settings getInstance() {
+            if (settings == null) {
+                settings = new Settings();
+            }
+            return settings;
+        }
+
         public int MainFormColor { get; set; }
     }
 }
