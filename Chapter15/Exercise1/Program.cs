@@ -72,15 +72,48 @@ namespace Exercise1 {
         }
 
         private static void Exercise1_6() {
-            
+            var query = Library.Books.Join(Library.Categories, //結合する2番目のシーケンス
+                      book => book.CategoryId, //対象シーケンスの結合キー
+                      category => category.Id, //２番目のシーケンスの結合キー
+                      (book, Category) => new {
+                          book.Title,
+                          book.PublishedYear,
+                          book.Price,
+                          CategoryName = Category.Name
+                      }).GroupBy(c => c.CategoryName)
+                        .OrderBy(c => c.Key);
+            foreach (var group in query) {
+                Console.WriteLine("#{0}", group.Key);
+                foreach (var item in group) {
+                    Console.WriteLine(" " + item.Title);
+                }
+            }
         }
 
         private static void Exercise1_7() {
-            
+            var categoryId = Library.Categories.Single(c => c.Name == "Development").Id;
+            var groups = Library.Books.Where(b => b.CategoryId == categoryId)
+                                .GroupBy(b => b.PublishedYear)
+                                .OrderBy(b => b.Key);
+            foreach (var group in groups) {
+                Console.WriteLine("#{0}年", group.Key);
+                foreach (var book in group) {
+                    Console.WriteLine(" " + book.Title);
+                }
+            }
         }
 
         private static void Exercise1_8() {
-            
+            var query = Library.Categories.GroupJoin(Library.Books,
+                        category => category.Id, //対象シーケンスの結合キー
+                        book => book.CategoryId, //2番目のシーケンスの結合キー
+                      (Category, book) => new {
+                          CategoryName = Category.Name,
+                          Count = book.Count()
+                      }).Where(x => x.Count >= 4);
+            foreach (var category in query) {
+                Console.WriteLine(category.CategoryName);
+            }
         }
     }
 }
