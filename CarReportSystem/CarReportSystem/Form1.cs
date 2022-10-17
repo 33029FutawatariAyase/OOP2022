@@ -50,6 +50,7 @@ namespace CarReportSystem {
             newRow[4] = cbCarName.Text;
             newRow[5] = tbReport.Text;
             newRow[6] = pbPicture.Image;
+            
             //データセットへ新しいレコードを追加
             infosys202203DataSet.CarReportDB.Rows.Add(newRow);
             //データ更新
