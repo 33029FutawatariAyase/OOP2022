@@ -41,8 +41,9 @@
         </StackPanel>
         <TextBlock x:Name="colorTextBox" Grid.Row="2" Grid.Column="2"/>
         <Label Grid.Row="3" Content="季節(_S)" Target="{Binding ElementName=seasonComboBox, Mode=OneWay}"/>
+        
         <ComboBox Name="seasonComboBox" Grid.Row="3"
-                  Grid.Column="1" SelectionChanged="seasonComboBox_SelectionChanged" SelectedIndex="0">
+                  Grid.Column="1" SelectionChanged="seasonComboBox_SelectionChanged" >
             <ComboBoxItem Content="春"/>
             <ComboBoxItem Content="夏"/>
             <ComboBoxItem Content="秋"/>
