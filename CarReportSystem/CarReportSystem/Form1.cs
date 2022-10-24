@@ -129,7 +129,8 @@ namespace CarReportSystem {
 
         private void Form1_Load(object sender, EventArgs e) {
 
-            //EnabledCheck(); //マスク処理呼び出し
+            
+            this.carReportDBTableAdapter.Fill(this.infosys202203DataSet.CarReportDB);
             try {
                 //設定ファイルを逆シリアル化(P307)して背景の色を設定
                 using (var reader = XmlReader.Create("settings.xml")) {
@@ -143,6 +144,7 @@ namespace CarReportSystem {
 
                 
             }
+            //EnabledCheck(); //マスク処理呼び出し
         }
 
         private void carReportDBBindingNavigatorSaveItem_Click(object sender, EventArgs e) {
