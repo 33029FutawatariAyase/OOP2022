@@ -49,8 +49,8 @@ namespace CarReportSystem {
             newRow[3] = GetRadioButtonMaker();
             newRow[4] = cbCarName.Text;
             newRow[5] = tbReport.Text;
-            newRow[6] = pbPicture.Image;
-            
+            newRow[6] = ImageToByteArray(pbPicture.Image);           
+
             //データセットへ新しいレコードを追加
             infosys202203DataSet.CarReportDB.Rows.Add(newRow);
             //データ更新
@@ -129,8 +129,8 @@ namespace CarReportSystem {
 
         private void Form1_Load(object sender, EventArgs e) {
 
-            
-            this.carReportDBTableAdapter.Fill(this.infosys202203DataSet.CarReportDB);
+            pbPicture.SizeMode = PictureBoxSizeMode.StretchImage;
+            //this.carReportDBTableAdapter.Fill(this.infosys202203DataSet.CarReportDB);
             try {
                 //設定ファイルを逆シリアル化(P307)して背景の色を設定
                 using (var reader = XmlReader.Create("settings.xml")) {
@@ -151,11 +151,6 @@ namespace CarReportSystem {
             this.Validate();
             this.carReportDBBindingSource.EndEdit();
             this.tableAdapterManager.UpdateAll(this.infosys202203DataSet);
-
-        }
-
-        private void Form1_Load_1(object sender, EventArgs e) {
-            pbPicture.SizeMode = PictureBoxSizeMode.StretchImage;
 
         }
 
