@@ -94,12 +94,16 @@ namespace CollarChecker {
         }
 
         private void DELETE_Click(object sender, RoutedEventArgs e) {
-            stockList.Items.Clear();
-            
+            var delIndex = stockList.SelectedIndex;
+
+            if (delIndex == -1) return;
+
+            stockList.Items.RemoveAt(delIndex);
+            colorList.RemoveAt(delIndex);
         }
 
         private void stockList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            
+            if (stockList.SelectedIndex == -1) return;
             Slider1.Value = colorList[stockList.SelectedIndex].Color.R;
             Slider2.Value = colorList[stockList.SelectedIndex].Color.G;
             Slider3.Value = colorList[stockList.SelectedIndex].Color.B;
