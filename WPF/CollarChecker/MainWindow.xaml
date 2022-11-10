@@ -47,7 +47,7 @@
                     Maximum="255" TickPlacement="TopLeft" TickFrequency="50" ValueChanged="Slider_ValueChanged"/>
             <Slider x:Name="Slider3" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center" 
                     Maximum="255" TickPlacement="TopLeft" TickFrequency="50" ValueChanged="Slider_ValueChanged"/>
-            <ComboBox ItemsSource="{Binding}" SelectedValue="{Binding Color}" Grid.Column="1" Grid.Row="4" Margin="3,30,3,3" Height="24" VerticalAlignment="Top" 
+            <ComboBox ItemsSource="{Binding}" SelectedValue="{Binding Color}" Grid.ColumnSpan="4" Grid.RowSpan="2" Grid.Column="1" Grid.Row="4" Margin="3,30,3,3" Height="24" VerticalAlignment="Top" 
                       VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="155" SelectionChanged="ComboBox_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -73,7 +73,7 @@
             </Grid.RowDefinitions>
             <Button Content="STOCK" FontSize="20" Width="100" Margin="10,10,110,0" Click="Button_Click"/>
             <Button x:Name="DELETE" Content="DELETE" FontSize="20" Width="100" Margin="115,10,5,0" Click="DELETE_Click"/>
-            <ListBox x:Name="stockList" Grid.Row="1" Margin="10" FontSize="20"/>
+            <ListBox x:Name="stockList" Grid.Row="1" Margin="10" FontSize="20" SelectionChanged="stockList_SelectionChanged"/>
         </Grid>
     </Grid>
 </Window>

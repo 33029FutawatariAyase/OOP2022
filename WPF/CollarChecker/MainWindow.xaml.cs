@@ -20,7 +20,8 @@ namespace CollarChecker {
     /// </summary>
     public partial class MainWindow : Window {
 
-        MyColor mycolor = new MyColor();
+        //MyColor mycolor = new MyColor();
+        List<MyColor> colorList = new List<MyColor>();
 
         public MainWindow() {
             InitializeComponent();
@@ -56,23 +57,54 @@ namespace CollarChecker {
             var mycolor = (MyColor)((ComboBox)sender).SelectedItem;
             //var color = mycolor.Color;
             //var name = mycolor.Name;
-            
+
             //TextBox1.Text = mycolor.Color.R.ToString();
             //TextBox2.Text = mycolor.Color.G.ToString();
             //TextBox3.Text = mycolor.Color.B.ToString();
 
-            Slider1.Value = mycolor.Color.R;
-            Slider2.Value = mycolor.Color.G;
-            Slider3.Value = mycolor.Color.B;
+            //Slider1.Value = mycolor.Color.R;
+            //Slider2.Value = mycolor.Color.G;
+            //Slider3.Value = mycolor.Color.B;
+
+            Slider1.Value = ((MyColor)((ComboBox)sender).SelectedItem).Color.R;
+            Slider2.Value = ((MyColor)((ComboBox)sender).SelectedItem).Color.G;
+            Slider3.Value = ((MyColor)((ComboBox)sender).SelectedItem).Color.B;
+            setColor();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) {
-            stockList.Items.Add("R:" + TextBox1.Text + " G:" + TextBox2.Text + " B:" + TextBox3.Text);
+            //stockList.Items.Add("R:" + TextBox1.Text + " G:" + TextBox2.Text + " B:" + TextBox3.Text);
+            MyColor stColor = new MyColor();
+            var r = byte.Parse(TextBox1.Text);
+            var g = byte.Parse(TextBox2.Text);
+            var b = byte.Parse(TextBox3.Text);
+
+            stColor.Color = Color.FromRgb(r, g, b);
+            //colorList.Add(stColor);
+
+            //テキストボックスのRGB値から色名称があるかチェック
+            var colorName = ((IEnumerable<MyColor>)DataContext)
+                                .Where(c => c.Color.R == stColor.Color.R &&
+                                       c.Color.G == stColor.Color.G &&
+                                       c.Color.B == stColor.Color.B).FirstOrDefault();
+
+            stockList.Items.Insert(0,colorName?.Name ?? "R:" + r + " G:" + g + " B:" + b);
+            colorList.Insert(0,stColor);
+
         }
 
         private void DELETE_Click(object sender, RoutedEventArgs e) {
             stockList.Items.Clear();
             
+        }
+
+        private void stockList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            
+            Slider1.Value = colorList[stockList.SelectedIndex].Color.R;
+            Slider2.Value = colorList[stockList.SelectedIndex].Color.G;
+            Slider3.Value = colorList[stockList.SelectedIndex].Color.B;
+            setColor();
+
         }
     }
 
