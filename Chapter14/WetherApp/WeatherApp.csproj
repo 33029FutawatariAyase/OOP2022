@@ -57,7 +57,9 @@
     </Compile>
     <Compile Include="jma.cs" />
     <Compile Include="jma2.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Program.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -70,6 +72,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -84,6 +87,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\41c1301fc5b49207150ddc3b466b13f0_t.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\d175e81861a7cd451c4f87551ce511b9_t.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\d71fc20a9834911d7e059023a642b113_t.jpeg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -19,6 +19,7 @@ namespace WetherApp {
         }
 
         private void btWeatherGet_Click(object sender, EventArgs e) {
+           
             var wc = new WebClient() {
                 Encoding = Encoding.UTF8
             };
@@ -256,42 +257,50 @@ namespace WetherApp {
             // var dString = wc.DownloadString("https://www.jma.go.jp/bosai/forecast/data/overview_forecast/130000.json");
             //var weather = wc.DownloadString("https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json");
 
+
             var json = JsonConvert.DeserializeObject<Rootobject>(dString);
             var json2 = JsonConvert.DeserializeObject<Class1[]>(weather);
-            if (json == null) {
-                tbWeatherInfo.Text = "地方が選択されていません。";
-            }
-            else {
-                tbWeatherInfo.Text = json.text;
-                
-            }
+
+            tbWeatherInfo.Text = json.text;
+            lbWeather.Text = json2[0].timeSeries[0].areas[0].weathers[0];
+            //tbWeather1.Text = json2[0].timeSeries[0].areas[0].weathers[0];
+            //tbWeather2.Text = json2[0].timeSeries[0].areas[0].weathers[1];
+            //tbWeather3.Text = json2[0].timeSeries[0].areas[0].weathers[2];
+            pbToday.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + json2[0].timeSeries[0].areas[0].weatherCodes[0] + ".png";
+            pbTomorrow.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + json2[0].timeSeries[0].areas[0].weatherCodes[1] + ".png";
+            pbDayAfterTomorrow.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + json2[1].timeSeries[0].areas[0].weatherCodes[1] + ".png";
+            pbThreeDaysLater.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + json2[1].timeSeries[0].areas[0].weatherCodes[2] + ".png";
+            pbFourDaysLater.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + json2[1].timeSeries[0].areas[0].weatherCodes[3] + ".png";
+            pbFiveDaysLater.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + json2[1].timeSeries[0].areas[0].weatherCodes[4] + ".png";
+            pbSixDaysLater.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + json2[1].timeSeries[0].areas[0].weatherCodes[5] + ".png";
+            
+            
+            lbTemps.Text = (json2[0].timeSeries[2].areas[0].temps[0] + "°");
+            lbTemps2.Text = (json2[0].timeSeries[2].areas[0].temps[3] + "°");
 
             
-            if(json2 == null) {
 
-            }
-            else {
-                tbWeather1.Text = json2[0].timeSeries[0].areas[0].weathers[0];
-                tbWeather2.Text = json2[0].timeSeries[0].areas[0].weathers[1];
-                tbWeather3.Text = json2[0].timeSeries[0].areas[0].weathers[2];
-                pbToday.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + json2[0].timeSeries[0].areas[0].weatherCodes[0] + ".png";
-                pbTomorrow.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + json2[0].timeSeries[0].areas[0].weatherCodes[1] + ".png";
-                pbDayAfterTomorrow.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + json2[0].timeSeries[0].areas[0].weatherCodes[2] + ".png";
-                pbThreeDaysLater.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + json2[1].timeSeries[0].areas[0].weatherCodes[2] + ".png";
-                pbFourDaysLater.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + json2[1].timeSeries[0].areas[0].weatherCodes[3] + ".png";
-                pbFiveDaysLater.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + json2[1].timeSeries[0].areas[0].weatherCodes[4] + ".png";
-                pbSixDaysLater.ImageLocation  = "https://www.jma.go.jp/bosai/forecast/img/" + json2[1].timeSeries[0].areas[0].weatherCodes[5] + ".png";
-            }
-            
-            //textBox1.Text = json2[0].timeSeries[2].areas[0].temps[0];
-            
-            
+        }
+
+        private void Form1_Load(object sender, EventArgs e) {
             DateTime today = DateTime.Today;
             label7.Text = (today.Month.ToString() + "/" + today.Day.ToString());
             DateTime tomorrow = DateTime.Today.AddDays(1);
             label8.Text = (tomorrow.Month.ToString() + "/" + tomorrow.Day.ToString());
             DateTime twodays = DateTime.Today.AddDays(2);
             label9.Text = (twodays.Month.ToString() + "/" + twodays.Day.ToString());
+            DateTime treedays = DateTime.Today.AddDays(3);
+            label10.Text = (treedays.Month.ToString() + "/" + treedays.Day.ToString());
+            DateTime fourdays = DateTime.Today.AddDays(4);
+            label11.Text = (fourdays.Month.ToString() + "/" + fourdays.Day.ToString());
+            DateTime fivedays = DateTime.Today.AddDays(5);
+            label12.Text = (fivedays.Month.ToString() + "/" + fivedays.Day.ToString());
+            DateTime sixdays = DateTime.Today.AddDays(6);
+            label6.Text = (sixdays.Month.ToString() + "/" + sixdays.Day.ToString());
+
+            cbAreaSelect.SelectedIndex = 15;
         }
+
+            
     }
 }
