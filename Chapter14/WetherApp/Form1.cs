@@ -263,9 +263,6 @@ namespace WetherApp {
 
             tbWeatherInfo.Text = json.text;
             lbWeather.Text = json2[0].timeSeries[0].areas[0].weathers[0];
-            //tbWeather1.Text = json2[0].timeSeries[0].areas[0].weathers[0];
-            //tbWeather2.Text = json2[0].timeSeries[0].areas[0].weathers[1];
-            //tbWeather3.Text = json2[0].timeSeries[0].areas[0].weathers[2];
             pbToday.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + json2[0].timeSeries[0].areas[0].weatherCodes[0] + ".png";
             pbTomorrow.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + json2[0].timeSeries[0].areas[0].weatherCodes[1] + ".png";
             pbDayAfterTomorrow.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + json2[1].timeSeries[0].areas[0].weatherCodes[1] + ".png";
@@ -279,7 +276,6 @@ namespace WetherApp {
             lbTemps2.Text = (json2[0].timeSeries[2].areas[0].temps[3] + "°");
 
             
-
         }
 
         private void Form1_Load(object sender, EventArgs e) {
@@ -299,8 +295,30 @@ namespace WetherApp {
             label6.Text = (sixdays.Month.ToString() + "/" + sixdays.Day.ToString());
 
             cbAreaSelect.SelectedIndex = 15;
-        }
 
+            var wc = new WebClient() {
+                Encoding = Encoding.UTF8
+            };
+            var dString = " ";
+            var weather = " ";
+            dString = wc.DownloadString("https://www.jma.go.jp/bosai/forecast/data/overview_forecast/100000.json");
+            weather = wc.DownloadString("https://www.jma.go.jp/bosai/forecast/data/forecast/100000.json");
+            var json = JsonConvert.DeserializeObject<Rootobject>(dString);
+            var json2 = JsonConvert.DeserializeObject<Class1[]>(weather);
+            tbWeatherInfo.Text = json.text;
+            lbWeather.Text = json2[0].timeSeries[0].areas[0].weathers[0];
+            pbToday.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + json2[0].timeSeries[0].areas[0].weatherCodes[0] + ".png";
+            pbTomorrow.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + json2[0].timeSeries[0].areas[0].weatherCodes[1] + ".png";
+            pbDayAfterTomorrow.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + json2[1].timeSeries[0].areas[0].weatherCodes[1] + ".png";
+            pbThreeDaysLater.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + json2[1].timeSeries[0].areas[0].weatherCodes[2] + ".png";
+            pbFourDaysLater.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + json2[1].timeSeries[0].areas[0].weatherCodes[3] + ".png";
+            pbFiveDaysLater.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + json2[1].timeSeries[0].areas[0].weatherCodes[4] + ".png";
+            pbSixDaysLater.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + json2[1].timeSeries[0].areas[0].weatherCodes[5] + ".png";
+            lbTemps.Text = (json2[0].timeSeries[2].areas[0].temps[0] + "°");
+            lbTemps2.Text = (json2[0].timeSeries[2].areas[0].temps[3] + "°");
+
+
+        }
             
     }
 }
